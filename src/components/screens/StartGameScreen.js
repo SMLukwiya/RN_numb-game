@@ -5,6 +5,9 @@ import Card from '../common/Card';
 import Colors from '../../constants/color'
 import Input from '../common/Input';
 import NumberContainer from '../common/NumberContainer';
+import BodyText from '../common/BodyText';
+import PrimaryButton from '../common/PrimaryButton';
+
 const StartGameScreen = (props) => {
 
   const [enteredValue, setEnteredValue] = useState('');
@@ -30,6 +33,7 @@ const StartGameScreen = (props) => {
     setConfirmed(true)
     setSelectedNumber(parseInt(chosenNumber));
     setEnteredValue('');
+    Keyboard.dismiss();
   }
 
   let confirmedOutput;
@@ -39,6 +43,9 @@ const StartGameScreen = (props) => {
     <Card style={styles.summaryContainer}>
       <Text>You selected</Text>
       <NumberContainer>{selectedNumber}</NumberContainer>
+      <PrimaryButton onPress={() => props.onStartGame(selectedNumber)}>
+        START GAME
+      </PrimaryButton>
     </Card>
   }
 
@@ -47,7 +54,7 @@ const StartGameScreen = (props) => {
       <View style={styles.screen}>
         <Text style={styles.title}>Game Screen Start</Text>
         <Card style={styles.inputContainer}>
-          <Text>Select a Number</Text>
+          <BodyText>Select a Number</BodyText>
           <Input style={styles.input}
             blurOnSubmit autoCapitalize="none"
             autoCorrect={false} keyboardType="number-pad"
@@ -73,7 +80,8 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 20,
-    marginVertical: 10
+    marginVertical: 10,
+    fontFamily: 'open-sans-bold'
   },
   inputContainer: {
     width: 300,
@@ -94,8 +102,9 @@ const styles = StyleSheet.create({
     textAlign: 'center'
   },
   summaryContainer: {
-
+    marginTop: 20,
+    alignItems: 'center'
   }
 })
 
-export default StartGameScreen
+export default StartGameScreen;
